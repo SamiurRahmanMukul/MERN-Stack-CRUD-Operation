@@ -1,3 +1,4 @@
+// external modules imports
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema(
@@ -15,6 +16,8 @@ const userSchema = mongoose.Schema(
   }
 );
 
+// create a User model
 const User = mongoose.model("User", userSchema);
 
+// export the User model
 module.exports = User;

@@ -1,4 +1,4 @@
-// external imports
+// external modules imports
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -6,12 +6,16 @@ const mongoose = require("mongoose");
 const path = require("path");
 const favicon = require("serve-favicon");
 
-// internal imports
+// internal modules imports
 const user = require("./src/routes/user");
 const exercise = require("./src/routes/exercise");
 
+// application configuration
 const app = express();
 dotenv.config({ path: ".env" });
+
+// environment variables
+const port = process.env.PORT || 5000;
 
 // mongoDB database connection
 mongoose
@@ -22,7 +26,7 @@ mongoose
   .then(() => console.log("MongoDB database connection established successful!"))
   .catch((err) => console.log("Database connection error: " + err));
 
-// request parser
+// application middleware
 app.use(cors());
 app.use(express.json());
 
@@ -32,16 +36,14 @@ app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
 // routing setup
 app.get("/", (req, res) => res.send("Hello world! Exercise Tracker App !!!"));
-app.use("/users", user);
-app.use("/exercise", exercise);
+app.use("api/v1/users", user);
+app.use("api/v1/exercise", exercise);
 
-// application listening on 5000 port...
-const port = process.env.PORT;
-
+// application start
 app.listen(port, (err) => {
   if (err) {
     console.log("Listening error: " + err);
   } else {
-    console.log(`Exercise Tracker App Listening At http://localhost:${port}`);
+    console.log(`Exercise Tracker App Running On http://localhost:${port}`);
   }
 });

@@ -1,3 +1,4 @@
+// external modules imports
 const mongoose = require("mongoose");
 
 const exerciseSchema = mongoose.Schema(
@@ -24,6 +25,8 @@ const exerciseSchema = mongoose.Schema(
   }
 );
 
+// create a Exercise model
 const Exercise = mongoose.model("Exercise", exerciseSchema);
 
+// export the Exercise model
 module.exports = Exercise;

@@ -1,14 +1,7 @@
 // exercise model import
 const Exercise = require("./../models/exercise.model");
 
-// get all exercise function
-async function getAllExercise(req, res) {
-  await Exercise.find()
-    .then((exercise) => res.json(exercise))
-    .catch((err) => res.status(400).json("Exercise GET error: " + err));
-}
-
-// add a new exercise
+// make a controller to add a exercise
 async function addExercise(req, res) {
   const username = req.body.username;
   const description = req.body.description;
@@ -28,14 +21,21 @@ async function addExercise(req, res) {
     .catch((err) => res.status(400).json("New Exercise add error: " + err));
 }
 
-// get a exerciser by id
+// make a controller to get all exercise
+async function getAllExercise(req, res) {
+  await Exercise.find()
+    .then((exercise) => res.json(exercise))
+    .catch((err) => res.status(400).json("Exercise GET error: " + err));
+}
+
+// make a controller to get a exercise by id
 async function getAExercise(req, res) {
   await Exercise.findById(req.params.id)
     .then((exercise) => res.json(exercise))
     .catch((err) => res.status(400).json("Get a Exercise error: " + err));
 }
 
-// update a exerciser by id
+// make a controller to update a exercise by id
 async function updateAExercise(req, res) {
   await Exercise.findById(req.params.id)
     .then((exercise) => {
@@ -52,13 +52,14 @@ async function updateAExercise(req, res) {
     .catch((err) => res.status(400).json("Update a (1) Exercise error: " + err));
 }
 
-// delete a exerciser by id
+// make a controller to delete a exercise by id
 async function deleteAExercise(req, res) {
   await Exercise.findByIdAndDelete(req.params.id)
     .then(() => res.json("Exercise deleted!"))
     .catch((err) => res.status(400).json("Delete a Exercise error: " + err));
 }
 
+// export all the exercise controllers
 module.exports = {
   getAllExercise,
   addExercise,

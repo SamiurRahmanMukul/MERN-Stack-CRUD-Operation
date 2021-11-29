@@ -1,17 +1,9 @@
 // user model import
 const User = require("./../models/user.model");
 
-// get all user function
-async function getUser(req, res) {
-  await User.find()
-    .then((users) => res.json(users))
-    .catch((err) => res.status(400).json("User GET error: " + err));
-}
-
-// adding a new user function
-async function addUser(req, res) {
+// make a controller to add a new user
+async function addNewUser(req, res) {
   const userName = req.body.username;
-
   const newUser = new User({ userName });
 
   newUser
@@ -20,4 +12,12 @@ async function addUser(req, res) {
     .catch((err) => res.status(400).json("New User add error: " + err));
 }
 
-module.exports = { getUser, addUser };
+// make a controller to get all users
+async function getAllUser(req, res) {
+  await User.find()
+    .then((users) => res.json(users))
+    .catch((err) => res.status(400).json("User GET error: " + err));
+}
+
+// user controllers export
+module.exports = { getAllUser, addNewUser };
