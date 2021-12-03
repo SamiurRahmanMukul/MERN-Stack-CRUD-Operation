@@ -1,3 +1,25 @@
+/*Title: Exercise Tracker App - app.js
+  Description: Builds a RESTful API for the exercise tracker app.
+  Author: Md. Samiur Rahman (Mukul) 
+  Website: http://www.SamiurRahmanMukul.epizy.com
+  Github: https://www.github.com/SamiurRahmanMukul
+  Email: example2022@gmail.com [FAKE EMAIL]
+  Date: 20/11/2021 */
+
+/* // *application routes visualization for users
+  app.get("api/v1/users");         // GET ALL USERS
+  app.get("api/v1/users/:id");     // GET USER BY ID
+  app.post("api/v1/users");        // CREATE USER
+  app.put("api/v1/users/:id");     // UPDATE USER
+  app.delete("api/v1/users/:id");  // DELETE USER */
+
+/* // *application routes visualization for exercises
+  app.get("api/v1/exercises");         // GET ALL EXERCISES
+  app.get("api/v1/exercises/:id");     // GET EXERCISE BY ID
+  app.post("api/v1/exercises");        // CREATE EXERCISE
+  app.put("api/v1/exercises/:id");     // UPDATE EXERCISE
+  app.delete("api/v1/exercises/:id");  // DELETE EXERCISE */
+
 // external modules imports
 const express = require("express");
 const dotenv = require("dotenv");
@@ -7,8 +29,9 @@ const path = require("path");
 const favicon = require("serve-favicon");
 
 // internal modules imports
-const user = require("./src/routes/user");
+const userRoute = require("./src/routes/user");
 const exercise = require("./src/routes/exercise");
+const { notFoundErrorHandler, errorHandler } = require("./src/middleware/errorHandler");
 
 // application configuration
 const app = express();
@@ -34,10 +57,15 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
-// routing setup
-app.get("/", (req, res) => res.send("Hello world! Exercise Tracker App !!!"));
-app.use("api/v1/users", user);
-app.use("api/v1/exercise", exercise);
+// application routes
+app.use("/api/v1/users", userRoute);
+app.use("/api/v1/exercises", exercise);
+
+// 404 not found error handler
+app.use(notFoundErrorHandler);
+
+// default error handler
+app.use(errorHandler);
 
 // application start
 app.listen(port, (err) => {

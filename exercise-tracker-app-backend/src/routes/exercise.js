@@ -1,26 +1,26 @@
 // external modules imports
 const express = require("express");
 
-// exercise controller imports
-const { getAllExercise, addExercise, getAExercise, updateAExercise, deleteAExercise } = require("./../controllers/exercise.controller");
-
 // express router object
 const router = express.Router();
 
-// create a route to add a new exercise
-router.route("/add").post(addExercise);
+// import exercise controller
+const { addNewExercise, getAllExercise, getSingleExercise, updateExercise, deleteExercise } = require("./../controllers/exercise.controller");
 
-// create a route to get all exercises
-router.route("/").get(getAllExercise);
+// make a route to create a new exercise
+router.post("/", addNewExercise);
 
-// create a route to get a single exercise
-router.route("/:id").get(getAExercise);
+// make a route to get all exercises
+router.get("/", getAllExercise);
 
-// create a route to update a single exercise
-router.route("/:id").put(updateAExercise);
+// make a route to get a single exercise by id
+router.get("/:id", getSingleExercise);
 
-// create a route to delete a single exercise
-router.route("/:id").delete(deleteAExercise);
+// make a route to update a single exercise by id
+router.put("/:id", updateExercise);
+
+// make a route to delete a single exercise by id
+router.delete("/:id", deleteExercise);
 
 // export the router object
 module.exports = router;
