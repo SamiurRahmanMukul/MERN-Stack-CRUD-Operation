@@ -39,6 +39,6 @@ Install the below extensions:
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [github-shield]: https://img.shields.io/badge/-Github-black.svg?style=flat-square&logo=github&color=555&logoColor=white
 
-<footer align="center">
+<p align="center">
   <b>HAPPY PROGRAMMING & DEVELOPING 🤣</b>
-</footer>
+</p>
